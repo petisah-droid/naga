@@ -1,0 +1,509 @@
+```html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N.A.G.A — Sovereign Digital Infrastructure & Executive Advisory</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: {
+                            DEFAULT: '#050507',
+                            light: '#0c0d12',
+                            card: '#11131b',
+                            border: '#1f2430'
+                        },
+                        gold: {
+                            light: '#f7e7ce',
+                            DEFAULT: '#d4af37',
+                            dark: '#aa7c11',
+                            metallic: 'linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%)'
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom Luxury Styling & Animations */
+        body {
+            background-color: #050507;
+            color: #e2e8f0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Gold Gradient Text Utility */
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 30%, #b38728 60%, #fbf5b7 85%, #aa771c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .border-gold-gradient {
+            border-image: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728) 1;
+        }
+
+        .gold-glow {
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+        }
+
+        .gold-glow-lg {
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.25);
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(17, 19, 27, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.12);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px -10px rgba(212, 175, 55, 0.15);
+        }
+
+        /* Gold Shimmer Button */
+        .btn-gold {
+            position: relative;
+            background: linear-gradient(135deg, #bf953f 0%, #d4af37 50%, #aa7c11 100%);
+            color: #000;
+            font-weight: 700;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-gold:hover::before {
+            left: 100%;
+        }
+
+        .btn-gold:hover {
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            transform: scale(1.02);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050507;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2430;
+            border-radius: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+
+        /* Ambient Glow Pulse */
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.25; transform: scale(1); }
+            50% { opacity: 0.45; transform: scale(1.08); }
+        }
+        .animate-pulse-glow {
+            animation: pulse-glow 8s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="selection:bg-gold-DEFAULT selection:text-black">
+
+    <!-- Interactive Canvas Background -->
+    <canvas id="hero-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="header">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-full border border-gold-DEFAULT/40 flex items-center justify-center bg-obsidian-card group-hover:border-gold-DEFAULT transition-all duration-300 gold-glow">
+                    <span class="font-cinzel text-xl font-black text-gold-gradient tracking-widest">N</span>
+                </div>
+                <span class="font-cinzel text-xl font-bold tracking-[0.25em] text-white group-hover:text-gold-light transition-colors">
+                    N.A.G.A
+                </span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-xs font-mono tracking-widest uppercase text-gray-400">
+                <a href="#vision" class="hover:text-gold-DEFAULT transition-colors">// Vision</a>
+                <a href="#expertise" class="hover:text-gold-DEFAULT transition-colors">// Specializations</a>
+                <a href="#metrics" class="hover:text-gold-DEFAULT transition-colors">// Track Record</a>
+                <a href="#contact" class="hover:text-gold-DEFAULT transition-colors">// Contact</a>
+            </nav>
+
+            <!-- CTA Button Header -->
+            <a href="#contact" class="hidden sm:inline-flex items-center px-5 py-2.5 rounded-full border border-gold-DEFAULT/40 text-xs font-mono tracking-widest text-gold-light hover:bg-gold-DEFAULT/10 hover:border-gold-DEFAULT transition-all gold-glow">
+                INITIATE DIRECT CONTACT
+            </a>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+
+        <!-- Hero Section -->
+        <section id="vision" class="min-h-screen flex items-center justify-center pt-24 pb-16 px-6 relative overflow-hidden">
+            <!-- Ambient Backdrop Glows -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold-DEFAULT/10 rounded-full blur-[140px] pointer-events-none animate-pulse-glow"></div>
+            
+            <div class="max-w-5xl mx-auto text-center relative z-10">
+                <!-- Badge -->
+                <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-gold-DEFAULT/20 bg-obsidian-card/80 text-xs font-mono text-gold-DEFAULT tracking-widest mb-8 gold-glow">
+                    <span class="w-2 h-2 rounded-full bg-gold-DEFAULT animate-ping"></span>
+                    <span>EXECUTIVE DIGITAL ARCHITECTURE & ADVISORY</span>
+                </div>
+
+                <!-- Main Headline -->
+                <h1 class="font-cinzel text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-tight mb-8">
+                    ARCHITECTING <br class="hidden sm:inline"/>
+                    <span class="text-gold-gradient">SOVEREIGN DIGITAL</span> <br />
+                    INFRASTRUCTURE
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="max-w-2xl mx-auto text-base sm:text-lg text-gray-400 font-light leading-relaxed mb-12">
+                    High-frequency digital systems, elite cryptographic security, and strategic technological governance tailored for modern high-net-worth entities and forward-tier enterprises.
+                </p>
+
+                <!-- Dual CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-5">
+                    <a href="#expertise" class="w-full sm:w-auto px-8 py-4 rounded-full btn-gold tracking-widest text-xs uppercase font-mono shadow-2xl">
+                        Explore Core Vision
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-full border border-gold-DEFAULT/30 bg-obsidian-card text-gold-light tracking-widest text-xs font-mono uppercase hover:border-gold-DEFAULT hover:bg-gold-DEFAULT/10 transition-all">
+                        Initiate Private Briefing
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pillars / Specialization Showcase -->
+        <section id="expertise" class="py-24 px-6 relative border-t border-obsidian-border/50">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-20">
+                    <h2 class="font-mono text-xs text-gold-DEFAULT tracking-[0.3em] uppercase mb-3">// Pillars of Mastery</h2>
+                    <h3 class="font-cinzel text-3xl sm:text-4xl font-bold text-white tracking-wide">
+                        Precision Engineering for High-Stakes Environments
+                    </h3>
+                </div>
+
+                <!-- 4 Core Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Card 1 -->
+                    <div class="glass-card rounded-2xl p-8 sm:p-10 relative overflow-hidden group">
+                        <div class="w-14 h-14 rounded-xl border border-gold-DEFAULT/30 bg-obsidian-light flex items-center justify-center mb-8 text-gold-DEFAULT group-hover:scale-110 transition-transform">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        </div>
+                        <h4 class="font-cinzel text-xl font-bold text-white mb-3 group-hover:text-gold-light transition-colors">
+                            Executive Technology Infrastructure
+                        </h4>
+                        <p class="text-sm text-gray-400 leading-relaxed font-light">
+                            Custom enterprise cloud topography, zero-trust perimeter deployment, and ultra-resilient distributed computing clusters designed for uncompromising uptime.
+                        </p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="glass-card rounded-2xl p-8 sm:p-10 relative overflow-hidden group">
+                        <div class="w-14 h-14 rounded-xl border border-gold-DEFAULT/30 bg-obsidian-light flex items-center justify-center mb-8 text-gold-DEFAULT group-hover:scale-110 transition-transform">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h4 class="font-cinzel text-xl font-bold text-white mb-3 group-hover:text-gold-light transition-colors">
+                            High-Frequency Digital Systems
+                        </h4>
+                        <p class="text-sm text-gray-400 leading-relaxed font-light">
+                            Sub-millisecond data pipeline optimizations, algorithmic execution frameworks, and low-latency API architecture engineered for critical performance bottlenecks.
+                        </p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="glass-card rounded-2xl p-8 sm:p-10 relative overflow-hidden group">
+                        <div class="w-14 h-14 rounded-xl border border-gold-DEFAULT/30 bg-obsidian-light flex items-center justify-center mb-8 text-gold-DEFAULT group-hover:scale-110 transition-transform">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <h4 class="font-cinzel text-xl font-bold text-white mb-3 group-hover:text-gold-light transition-colors">
+                            Cryptographic & Security Advisory
+                        </h4>
+                        <p class="text-sm text-gray-400 leading-relaxed font-light">
+                            Advanced cryptographic auditing, threat intelligence vector analysis, and bespoke key management protocols to safeguard sovereign digital assets.
+                        </p>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="glass-card rounded-2xl p-8 sm:p-10 relative overflow-hidden group">
+                        <div class="w-14 h-14 rounded-xl border border-gold-DEFAULT/30 bg-obsidian-light flex items-center justify-center mb-8 text-gold-DEFAULT group-hover:scale-110 transition-transform">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        </div>
+                        <h4 class="font-cinzel text-xl font-bold text-white mb-3 group-hover:text-gold-light transition-colors">
+                            Sovereign Web Architecture
+                        </h4>
+                        <p class="text-sm text-gray-400 leading-relaxed font-light">
+                            Bespoke, unbreachable web portals crafted with cutting-edge front-end precision, minimalistic aesthetic elegance, and complete serverless agility.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Metrics / Track Record Ticker -->
+        <section id="metrics" class="py-16 bg-obsidian-card/40 border-y border-obsidian-border/60">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="p-4">
+                        <div class="font-cinzel text-3xl sm:text-5xl font-extrabold text-gold-gradient mb-2" id="counter-1">99.999%</div>
+                        <div class="font-mono text-xs text-gray-400 uppercase tracking-widest">Uptime SLA Standard</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="font-cinzel text-3xl sm:text-5xl font-extrabold text-gold-gradient mb-2" id="counter-2">&lt; 1.2ms</div>
+                        <div class="font-mono text-xs text-gray-400 uppercase tracking-widest">Execution Latency</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="font-cinzel text-3xl sm:text-5xl font-extrabold text-gold-gradient mb-2" id="counter-3">$2.5B+</div>
+                        <div class="font-mono text-xs text-gray-400 uppercase tracking-widest">Protected Assets</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="font-cinzel text-3xl sm:text-5xl font-extrabold text-gold-gradient mb-2" id="counter-4">Zero</div>
+                        <div class="font-mono text-xs text-gray-400 uppercase tracking-widest">Security Compromises</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-28 px-6 relative">
+            <div class="max-w-4xl mx-auto">
+                <div class="glass-card rounded-3xl p-8 sm:p-14 relative overflow-hidden gold-glow-lg text-center">
+                    
+                    <span class="inline-block px-4 py-1.5 rounded-full border border-gold-DEFAULT/30 bg-obsidian-light text-xs font-mono text-gold-DEFAULT tracking-widest uppercase mb-6">
+                        Confidential Channels
+                    </span>
+
+                    <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white mb-6">
+                        Initiate Strategic Engagement
+                    </h2>
+
+                    <p class="text-gray-400 text-sm sm:text-base font-light max-w-xl mx-auto mb-10 leading-relaxed">
+                        Direct consultation inquiries are screened with strict confidentiality. Reach out through our official advisory email vector below.
+                    </p>
+
+                    <!-- Copy Email Block -->
+                    <div class="inline-flex flex-col sm:flex-row items-center justify-between p-3 sm:p-4 rounded-2xl bg-obsidian-DEFAULT border border-gold-DEFAULT/30 max-w-md w-full mx-auto gap-4">
+                        <div class="flex items-center space-x-3 px-3">
+                            <svg class="w-5 h-5 text-gold-DEFAULT shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <span class="font-mono text-sm sm:text-base font-semibold text-white tracking-wider" id="email-text">
+                                g@or.work.gd
+                            </span>
+                        </div>
+
+                        <button onclick="copyEmail()" id="copy-btn" class="w-full sm:w-auto px-6 py-3 rounded-xl btn-gold font-mono text-xs uppercase tracking-widest flex items-center justify-center space-x-2 shrink-0">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            <span id="btn-label">Copy Address</span>
+                        </button>
+                    </div>
+
+                    <div id="toast" class="mt-4 text-xs font-mono text-gold-DEFAULT opacity-0 transition-opacity duration-300">
+                        ✓ Email address copied to clipboard
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-obsidian-border/50 text-xs font-mono text-gray-500">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="tracking-widest uppercase text-gray-400">System Status: Sovereign & Operational</span>
+            </div>
+
+            <div class="text-center sm:text-right">
+                <p>&copy; <span id="year"></span> N.A.G.A. All rights reserved.</p>
+                <p class="text-[10px] text-gray-600 mt-1">ENCRYPTION LEVEL: AES-256 / RSA-4096</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JS -->
+    <script>
+        // Set dynamic year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Copy Email Functionality
+        function copyEmail() {
+            const email = "g@or.work.gd";
+            
+            // Clipboard copy with iframe fallback support
+            const el = document.createElement('textarea');
+            el.value = email;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+
+            // Button label animation
+            const btnLabel = document.getElementById('btn-label');
+            const toast = document.getElementById('toast');
+            
+            btnLabel.textContent = 'Copied!';
+            toast.style.opacity = '1';
+
+            setTimeout(() => {
+                btnLabel.textContent = 'Copy Address';
+                toast.style.opacity = '0';
+            }, 3000);
+        }
+
+        // Header Background Blur on Scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('bg-obsidian-DEFAULT/80', 'backdrop-blur-md', 'border-b', 'border-gold-DEFAULT/10', 'py-3');
+                header.classList.remove('py-5');
+            } else {
+                header.classList.remove('bg-obsidian-DEFAULT/80', 'backdrop-blur-md', 'border-b', 'border-gold-DEFAULT/10', 'py-3');
+                header.classList.add('py-5');
+            }
+        });
+
+        // HTML5 Interactive Canvas Particles Background
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            initParticles();
+        });
+
+        let mouse = {
+            x: width / 2,
+            y: height / 2,
+            radius: 180
+        };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = (Math.random() - 0.5) * 0.4;
+                this.radius = Math.random() * 1.5 + 0.5;
+                this.alpha = Math.random() * 0.5 + 0.2;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(212, 175, 55, ${this.alpha})`;
+                ctx.fill();
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                // Mouse interaction distance
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < mouse.radius) {
+                    const angle = Math.atan2(dy, dx);
+                    const force = (mouse.radius - distance) / mouse.radius;
+                    this.x -= Math.cos(angle) * force * 2;
+                    this.y -= Math.sin(angle) * force * 2;
+                }
+            }
+        }
+
+        let particles = [];
+        function initParticles() {
+            particles = [];
+            const particleCount = Math.min(Math.floor((width * height) / 15000), 100);
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Connect nearby particles with subtle lines
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 130) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(212, 175, 55, ${0.15 * (1 - dist / 130)})`;
+                        ctx.lineWidth = 0.6;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            requestAnimationFrame(animateCanvas);
+        }
+
+        window.onload = function() {
+            initParticles();
+            animateCanvas();
+        };
+    </script>
+</body>
+</html>
+```
