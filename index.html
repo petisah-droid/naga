@@ -254,4 +254,209 @@
         .input-control:focus {
             border-color: #d4af37;
             background: rgba(255, 255, 255, 0.08);
-            
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.2);
+        }
+
+        textarea.input-control {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #bf953f 0%, #d4af37 50%, #aa7c11 100%);
+            color: #070709;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.35);
+            transition: transform 0.2s;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        #contactStatus {
+            margin-top: 14px;
+            text-align: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            padding: 8px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        /* Email Direct Box */
+        .email-direct {
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .email-link {
+            color: #d4af37;
+            font-family: 'Space Mono', monospace;
+            text-decoration: none;
+            font-weight: 700;
+            margin-left: 6px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            text-align: center;
+            padding: 30px 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: #475569;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <a href="#" class="brand">
+            <div class="brand-badge">
+                <span>N</span>
+            </div>
+            <span class="brand-name">N.A.G.A</span>
+        </a>
+
+        <a href="#contact" class="nav-btn">HUBUNGI</a>
+    </header>
+
+    <div class="container">
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="tagline">SOVEREIGN DIGITAL ARCHITECTURE</div>
+            <h1>
+                ARCHITECTING <br>
+                <span class="text-gold">SOVEREIGN DIGITAL</span> <br>
+                INFRASTRUCTURE
+            </h1>
+            <p>
+                Sistem digital tangguh, keamanan tingkat lanjut, dan arsitektur serverless berkecepatan tinggi yang dirancang tanpa kompromi.
+            </p>
+            <a href="#contact" class="hero-btn">KIRIM INSTRUKSI</a>
+        </section>
+
+        <!-- Feature Pillars -->
+        <div class="grid">
+            <div class="card">
+                <h3>Cloud Topography</h3>
+                <p>Infrastruktur distributed serverless dengan uptime tinggi dan proteksi zero-trust.</p>
+            </div>
+            <div class="card">
+                <h3>Low-Latency Engine</h3>
+                <p>Optimasi eksekusi data sub-milidetik untuk kebutuhan pipeline real-time.</p>
+            </div>
+            <div class="card">
+                <h3>Security Advisory</h3>
+                <p>Protokol proteksi ketat dengan arsitektur akses tertutup dan enkripsi solid.</p>
+            </div>
+        </div>
+
+        <!-- Contact Section Form -->
+        <section id="contact" class="form-card">
+            <div class="form-header">
+                <h2>Direct Sovereign Channel</h2>
+                <p>Isi formulir di bawah ini untuk mengirimkan pesan langsung ke meja kontrol Telegram kami.</p>
+            </div>
+
+            <form id="nagaContactForm" onsubmit="event.preventDefault(); kirimPesanForm();">
+                <div class="input-group">
+                    <label for="senderName">Nama Lengkap / Identitas</label>
+                    <input type="text" id="senderName" class="input-control" placeholder="Contoh: Saut Sinaga / Partner" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="senderEmail">Alamat Email Aktif</label>
+                    <input type="email" id="senderEmail" class="input-control" placeholder="nama@domain.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="senderMessage">Pesan / Instruksi</label>
+                    <textarea id="senderMessage" class="input-control" placeholder="Tuliskan tujuan instruksi atau pesan Anda di sini..." required></textarea>
+                </div>
+
+                <button type="submit" id="btnSubmitForm" class="submit-btn">
+                    KIRIM PESAN SEKARANG
+                </button>
+
+                <div id="contactStatus"></div>
+            </form>
+
+            <div class="email-direct">
+                Atau hubungi email resmi: 
+                <a href="mailto:g@or.work.gd" class="email-link">g@or.work.gd</a>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; <span id="year"></span> N.A.G.A. All rights reserved.</p>
+    </footer>
+
+    <!-- Script Pengiriman Pesan ke Telegram -->
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        async function kirimPesanForm() {
+            const name = document.getElementById("senderName").value.trim();
+            const email = document.getElementById("senderEmail").value.trim();
+            const message = document.getElementById("senderMessage").value.trim();
+            const statusDiv = document.getElementById("contactStatus");
+            const submitBtn = document.getElementById("btnSubmitForm");
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "MENGIRIM SINYAL...";
+            statusDiv.style.display = "block";
+            statusDiv.style.color = "#d4af37";
+            statusDiv.style.background = "rgba(212, 175, 55, 0.1)";
+            statusDiv.innerText = "Sedang mengirim ke Telegram Master...";
+
+            try {
+                const response = await fetch("/api/contact", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, email, message })
+                });
+
+                const resData = await response.json();
+
+                if (response.ok && resData.success) {
+                    statusDiv.style.color = "#4ade80";
+                    statusDiv.style.background = "rgba(74, 222, 128, 0.1)";
+                    statusDiv.innerText = "✓ Pesan berhasil terkirim langsung ke Telegram N.A.G.A!";
+                    document.getElementById("nagaContactForm").reset();
+                } else {
+                    statusDiv.style.color = "#f87171";
+                    statusDiv.style.background = "rgba(248, 113, 113, 0.1)";
+                    statusDiv.innerText = "Gagal: " + (resData.error || "Cek file /api/contact.js");
+                }
+            } catch (err) {
+                statusDiv.style.color = "#f87171";
+                statusDiv.style.background = "rgba(248, 113, 113, 0.1)";
+                statusDiv.innerText = "Gagal menghubungi server. Pastikan file /api/contact.js sudah ada.";
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "KIRIM PESAN SEKARANG";
+            }
+        }
+    </script>
+</body>
+</html>
