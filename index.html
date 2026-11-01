@@ -113,6 +113,25 @@
             transform: scale(1.02);
         }
 
+        /* Custom Form Input Focus */
+        .naga-input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .naga-input:focus {
+            border-color: #d4af37;
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -282,257 +301,77 @@
             <div class="max-w-7xl mx-auto px-6">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                     <div class="p-4">
-                        <div class="font-cinzel text-3xl sm:text-5xl font-extrabold text-gold-gradient mb-2" id="counter-1">99.999%</div>
+                        <div class="font-cinzel text-3xl sm:text-5xl font-extrabold text-gold-gradient mb-2">99.999%</div>
                         <div class="font-mono text-xs text-gray-400 uppercase tracking-widest">Uptime SLA Standard</div>
                     </div>
                     <div class="p-4">
-                        <div class="font-cinzel text-3xl sm:text-5xl font-extrabold text-gold-gradient mb-2" id="counter-2">&lt; 1.2ms</div>
+                        <div class="font-cinzel text-3xl sm:text-5xl font-extrabold text-gold-gradient mb-2">&lt; 1.2ms</div>
                         <div class="font-mono text-xs text-gray-400 uppercase tracking-widest">Execution Latency</div>
                     </div>
                     <div class="p-4">
-                        <div class="font-cinzel text-3xl sm:text-5xl font-extrabold text-gold-gradient mb-2" id="counter-3">$2.5B+</div>
+                        <div class="font-cinzel text-3xl sm:text-5xl font-extrabold text-gold-gradient mb-2">$2.5B+</div>
                         <div class="font-mono text-xs text-gray-400 uppercase tracking-widest">Protected Assets</div>
                     </div>
                     <div class="p-4">
-                        <div class="font-cinzel text-3xl sm:text-5xl font-extrabold text-gold-gradient mb-2" id="counter-4">Zero</div>
+                        <div class="font-cinzel text-3xl sm:text-5xl font-extrabold text-gold-gradient mb-2">Zero</div>
                         <div class="font-mono text-xs text-gray-400 uppercase tracking-widest">Security Compromises</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
+        <!-- Contact Section & Form -->
         <section id="contact" class="py-28 px-6 relative">
-            <div class="max-w-4xl mx-auto">
-                <div class="glass-card rounded-3xl p-8 sm:p-14 relative overflow-hidden gold-glow-lg text-center">
+            <div class="max-w-3xl mx-auto">
+                <div class="glass-card rounded-3xl p-8 sm:p-14 relative overflow-hidden gold-glow-lg">
                     
-                    <span class="inline-block px-4 py-1.5 rounded-full border border-gold-DEFAULT/30 bg-obsidian-light text-xs font-mono text-gold-DEFAULT tracking-widest uppercase mb-6">
-                        Confidential Channels
-                    </span>
+                    <div class="text-center mb-10">
+                        <span class="inline-block px-4 py-1.5 rounded-full border border-gold-DEFAULT/30 bg-obsidian-light text-xs font-mono text-gold-DEFAULT tracking-widest uppercase mb-4">
+                            Direct Sovereign Channel
+                        </span>
+                        <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-white mb-4">
+                            Initiate Strategic Engagement
+                        </h2>
+                        <p class="text-gray-400 text-sm font-light max-w-lg mx-auto">
+                            Direct consultation inquiries are screened with strict confidentiality. Kirimkan pesan resmi Anda langsung ke meja kendali Telegram kami.
+                        </p>
+                    </div>
 
-                    <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white mb-6">
-                        Initiate Strategic Engagement
-                    </h2>
-
-                    <p class="text-gray-400 text-sm sm:text-base font-light max-w-xl mx-auto mb-10 leading-relaxed">
-                        Direct consultation inquiries are screened with strict confidentiality. Reach out through our official advisory email vector below.
-                    </p>
-
-                    <!-- Copy Email Block -->
-                    <div class="inline-flex flex-col sm:flex-row items-center justify-between p-3 sm:p-4 rounded-2xl bg-obsidian-DEFAULT border border-gold-DEFAULT/30 max-w-md w-full mx-auto gap-4">
-                        <div class="flex items-center space-x-3 px-3">
-                            <svg class="w-5 h-5 text-gold-DEFAULT shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                            <span class="font-mono text-sm sm:text-base font-semibold text-white tracking-wider" id="email-text">
-                                g@or.work.gd
-                            </span>
+                    <!-- Contact Form -->
+                    <form id="nagaContactForm" class="space-y-6">
+                        <div>
+                            <label class="block text-xs font-mono text-gold-DEFAULT uppercase tracking-widest mb-2">
+                                Nama Lengkap / Identitas
+                            </label>
+                            <input type="text" id="senderName" required placeholder="Contoh: Saut Sinaga / Executive Partner" class="naga-input">
                         </div>
 
-                        <button onclick="copyEmail()" id="copy-btn" class="w-full sm:w-auto px-6 py-3 rounded-xl btn-gold font-mono text-xs uppercase tracking-widest flex items-center justify-center space-x-2 shrink-0">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                            <span id="btn-label">Copy Address</span>
+                        <div>
+                            <label class="block text-xs font-mono text-gold-DEFAULT uppercase tracking-widest mb-2">
+                                Alamat Email Aktif
+                            </label>
+                            <input type="email" id="senderEmail" required placeholder="nama@perusahaan.com" class="naga-input">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-mono text-gold-DEFAULT uppercase tracking-widest mb-2">
+                                Pesan / Ringkasan Kebutuhan
+                            </label>
+                            <textarea id="senderMessage" required rows="4" placeholder="Tuliskan tujuan instruksi atau proyek yang ingin didiskusikan..." class="naga-input resize-y"></textarea>
+                        </div>
+
+                        <button type="submit" id="btnSubmitForm" class="w-full py-4 rounded-xl btn-gold font-mono text-xs uppercase tracking-widest shadow-xl flex items-center justify-center space-x-2">
+                            <span>KIRIM PESAN SEKARANG</span>
                         </button>
+
+                        <div id="contactStatus" class="hidden text-center text-xs font-mono py-2"></div>
+                    </form>
+
+                    <!-- Divider -->
+                    <div class="relative my-10">
+                        <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-obsidian-border"></div></div>
+                        <div class="relative flex justify-center text-xs uppercase"><span class="bg-obsidian-card px-4 text-gray-500 font-mono">Atau Salin Alamat Resmi</span></div>
                     </div>
 
-                    <div id="toast" class="mt-4 text-xs font-mono text-gold-DEFAULT opacity-0 transition-opacity duration-300">
-                        ✓ Email address copied to clipboard
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="py-12 border-t border-obsidian-border/50 text-xs font-mono text-gray-500">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div class="flex items-center space-x-3">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="tracking-widest uppercase text-gray-400">System Status: Sovereign & Operational</span>
-            </div>
-
-            <div class="text-center sm:text-right">
-                <p>&copy; <span id="year"></span> N.A.G.A. All rights reserved.</p>
-                <p class="text-[10px] text-gray-600 mt-1">ENCRYPTION LEVEL: AES-256 / RSA-4096</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Interactive JS -->
-    <script>
-        // Set dynamic year
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Copy Email Functionality
-        function copyEmail() {
-            const email = "g@or.work.gd";
-            
-            // Clipboard copy with iframe fallback support
-            const el = document.createElement('textarea');
-            el.value = email;
-            document.body.appendChild(el);
-            el.select();
-            document.execCommand('copy');
-            document.body.removeChild(el);
-
-            // Button label animation
-            const btnLabel = document.getElementById('btn-label');
-            const toast = document.getElementById('toast');
-            
-            btnLabel.textContent = 'Copied!';
-            toast.style.opacity = '1';
-
-            setTimeout(() => {
-                btnLabel.textContent = 'Copy Address';
-                toast.style.opacity = '0';
-            }, 3000);
-        }
-
-        // Header Background Blur on Scroll
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('bg-obsidian-DEFAULT/80', 'backdrop-blur-md', 'border-b', 'border-gold-DEFAULT/10', 'py-3');
-                header.classList.remove('py-5');
-            } else {
-                header.classList.remove('bg-obsidian-DEFAULT/80', 'backdrop-blur-md', 'border-b', 'border-gold-DEFAULT/10', 'py-3');
-                header.classList.add('py-5');
-            }
-        });
-
-        // HTML5 Interactive Canvas Particles Background
-        const canvas = document.getElementById('hero-canvas');
-        const ctx = canvas.getContext('2d');
-
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            initParticles();
-        });
-
-        let mouse = {
-            x: width / 2,
-            y: height / 2,
-            radius: 180
-        };
-
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
-        });
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.4;
-                this.vy = (Math.random() - 0.5) * 0.4;
-                this.radius = Math.random() * 1.5 + 0.5;
-                this.alpha = Math.random() * 0.5 + 0.2;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(212, 175, 55, ${this.alpha})`;
-                ctx.fill();
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
-
-                // Mouse interaction distance
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < mouse.radius) {
-                    const angle = Math.atan2(dy, dx);
-                    const force = (mouse.radius - distance) / mouse.radius;
-                    this.x -= Math.cos(angle) * force * 2;
-                    this.y -= Math.sin(angle) * force * 2;
-                }
-            }
-        }
-
-        let particles = [];
-        function initParticles() {
-            particles = [];
-            const particleCount = Math.min(Math.floor((width * height) / 15000), 100);
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        function animateCanvas() {
-            ctx.clearRect(0, 0, width, height);
-
-            // Connect nearby particles with subtle lines
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    let dx = particles[i].x - particles[j].x;
-                    let dy = particles[i].y - particles[j].y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 130) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(212, 175, 55, ${0.15 * (1 - dist / 130)})`;
-                        ctx.lineWidth = 0.6;
-                        ctx.stroke();
-                    }
-                }
-            }
-
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-
-            requestAnimationFrame(animateCanvas);
-        }
-
-        window.onload = function() {
-            initParticles();
-            animateCanvas();
-        };
-// Fungsi untuk memicu notifikasi ke Telegram Anda
-async function kirimNotifikasiKeTelegram(dataKontak = {}) {
-  try {
-    const respon = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: dataKontak.name || "Pengunjung Web N.A.G.A",
-        email: dataKontak.email || "g@or.work.gd",
-        message: dataKontak.message || "Pengunjung mengklik tombol kontak di website."
-      })
-    });
-    
-    if (respon.ok) {
-      alert("Pesan Anda telah berhasil diteruskan ke Telegram Owner!");
-    }
-  } catch (e) {
-    console.error("Gagal mengirim notifikasi:", e);
-  }
-}
-
-// Menghubungkan ke tombol kontak yang ada di landing page
-document.querySelectorAll('a[href^="mailto:"], .contact-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    kirimNotifikasiKeTelegram({
-      name: "Pengunjung Tertarik",
-      message: "Pengunjung menekan tombol kontak g@or.work.gd"
-    });
-  });
-});
-</script>
-</body>
-</html>
-```
+                    <!-- Copy Email Block -->
+                    <div class="flex flex-col sm:flex-row items-center justify-between p-3 rounded-2xl bg-obs
