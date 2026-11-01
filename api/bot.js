@@ -50,7 +50,7 @@ export default async function handler(req, res) {
         // Jangan menyapa diri bot sendiri jika bot yang diundang
         if (member.is_bot) continue;
         const name = member.first_name || "Kawan";
-        const welcomeText = `Selamat datang <b>${name}</b>!\n\nHalo, kunjungi naga.hs.vc untuk profile kami`;
+        const welcomeText = `Selamat datang <b>${name}</b>!\n\nHalo, kunjungi http://naga.hs.vc/  untuk profile kami`;
         await sendMessage(ALLOWED_GROUP_ID, welcomeText);
       }
       return res.status(200).send("Member greeted");
