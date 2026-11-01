@@ -378,7 +378,7 @@
             <form id="nagaContactForm" onsubmit="event.preventDefault(); kirimPesanForm();">
                 <div class="input-group">
                     <label for="senderName">Nama Lengkap / Identitas</label>
-                    <input type="text" id="senderName" class="input-control" placeholder="Contoh: Saut Sinaga / Partner" required>
+                    <input type="text" id="senderName" class="input-control" placeholder="Contoh: Elon Musk / Partner" required>
                 </div>
 
                 <div class="input-group">
@@ -427,7 +427,7 @@
             statusDiv.style.display = "block";
             statusDiv.style.color = "#d4af37";
             statusDiv.style.background = "rgba(212, 175, 55, 0.1)";
-            statusDiv.innerText = "Sedang mengirim ke Telegram Master...";
+            statusDiv.innerText = "Sedang mengirim ke Telegram Perusahaan...";
 
             try {
                 const response = await fetch("/api/contact", {
