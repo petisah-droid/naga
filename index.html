@@ -502,7 +502,37 @@
             initParticles();
             animateCanvas();
         };
-    </script>
+// Fungsi untuk memicu notifikasi ke Telegram Anda
+async function kirimNotifikasiKeTelegram(dataKontak = {}) {
+  try {
+    const respon = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: dataKontak.name || "Pengunjung Web N.A.G.A",
+        email: dataKontak.email || "g@or.work.gd",
+        message: dataKontak.message || "Pengunjung mengklik tombol kontak di website."
+      })
+    });
+    
+    if (respon.ok) {
+      alert("Pesan Anda telah berhasil diteruskan ke Telegram Owner!");
+    }
+  } catch (e) {
+    console.error("Gagal mengirim notifikasi:", e);
+  }
+}
+
+// Menghubungkan ke tombol kontak yang ada di landing page
+document.querySelectorAll('a[href^="mailto:"], .contact-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    kirimNotifikasiKeTelegram({
+      name: "Pengunjung Tertarik",
+      message: "Pengunjung menekan tombol kontak g@or.work.gd"
+    });
+  });
+});
+</script>
 </body>
 </html>
 ```
